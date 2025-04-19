@@ -25,6 +25,7 @@ var aliasFolders = [
 ];
 // https://vitejs.dev/config/
 export default defineConfig({
+    base: '/Frontend/',
     plugins: [react()],
     resolve: {
         alias: __assign(__assign({}, Object.fromEntries(aliasFolders.map(function (v) { return [
