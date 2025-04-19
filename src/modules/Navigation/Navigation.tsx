@@ -24,6 +24,8 @@ const Navigation: React.FC<NavigationProps> = ({ data }) => {
           label={el}
           onClick={() => selectPoint(index)}
           checked={selectedTab >= index}
+          isFirst={index === 0}
+          isLast={index === data.length - 1}
         />
       ))}
     </nav>

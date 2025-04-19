@@ -6,11 +6,14 @@ import { content, ContentColors } from '@lib/theme/colors';
 import { media } from '@lib/theme/media';
 
 export const Header = withIndentStyles(styled.h1`
-  color: #006fb9;
+  color: ${content.primary};
   font-size: 40px;
 `);
 
-export const SubHeader = withIndentStyles(styled.h2``);
+export const SubHeader = withIndentStyles(styled.h2`
+  color: ${content.dark};
+  font-size: 36px;
+`);
 export const ItemTitle = withIndentStyles(styled.h3``);
 
 export const Paragraph = withIndentStyles(styled.p`
