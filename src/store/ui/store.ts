@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { uiStateName, UIState } from './type';
+import { uiStateName } from './type';
 import { uiInitialState } from './constants';
 
 const uiSlice = createSlice({
