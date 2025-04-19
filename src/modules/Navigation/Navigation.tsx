@@ -5,21 +5,36 @@ import { useDispatch, useSelector } from 'react-redux';
 
 type NavigationProps = {
   data: string[];
+  scrollToRef: React.RefObject<(HTMLDivElement | null)[]>;
 };
 
-const Navigation: React.FC<NavigationProps> = ({ data }) => {
+const Navigation: React.FC<NavigationProps> = ({ data, scrollToRef }) => {
   const dispatch = useDispatch();
   const selectedTab = useSelector(uiSelectors.getActiveTab);
 
   const selectPoint = (index: number) => {
     console.log(index);
-    return dispatch(uiActions.setActiveTab(index));
+    dispatch(uiActions.setActiveTab(index));
+
+    // Прокрутка к соответствующему элементу
+    const element = scrollToRef.current![index];
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
   };
 
   return (
-    <nav>
+    <nav
+      style={{
+        position: 'sticky',
+        top: 0,
+        zIndex: 1000,
+        backgroundColor: '#fff',
+      }}
+    >
       {data.map((el, index) => (
         <NavPoint
+          key={index}
           index={index + 1}
           label={el}
           onClick={() => selectPoint(index)}

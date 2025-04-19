@@ -65,10 +65,25 @@ export interface CategoryItem {
   title: string;
 }
 
-export type Response<T> = {
-  message: T;
-  statusCode: number;
-};
+// Тип для успешного ответа
+interface SuccessResponse {
+  Info: string; // или просто string, если это единственное поле
+}
+
+// Тип для ошибки валидации
+interface ValidationError {
+  loc: (string | number)[]; // Массив строк и/или чисел
+  msg: string; // Сообщение об ошибке
+  type: string; // Тип ошибки
+}
+
+// Тип для ответа с ошибкой
+interface ErrorResponse {
+  detail: ValidationError[]; // Массив ошибок валидации
+}
+
+// Объединенный тип для ответа
+export type ApiResponse = SuccessResponse | ErrorResponse;
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type AnyObject = Record<string, any>;

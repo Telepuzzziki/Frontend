@@ -6,6 +6,8 @@ import { useDropzone } from 'react-dropzone';
 import styled from 'styled-components';
 import { content } from '@lib/theme/colors';
 import { showErrorNotification } from '@lib/utils/notification';
+import Button from '@components/Button';
+import { reauestAddFile } from '@lib/api';
 // import { FileUploader } from 'react-drag-drop-files';
 
 const FileUploader = styled.div`
@@ -19,6 +21,7 @@ const FileUploader = styled.div`
 const FileUploadingModule = () => {
   const dispatch = useDispatch();
   const file = useSelector(uiSelectors.getFile);
+  const requests = useSelector(uiSelectors.getRequests);
 
   const onDrop = (acceptedFiles: File[]) => {
     if (acceptedFiles[0]) {
@@ -33,6 +36,14 @@ const FileUploadingModule = () => {
         showErrorNotification('Недопустимый тип файла');
         console.log(acceptedFiles[0].type);
       }
+    }
+  };
+
+  const fetchFile = () => {
+    if (file?.file) {
+      reauestAddFile(file.file);
+    } else {
+      showErrorNotification('Загрузите файл');
     }
   };
 
@@ -77,6 +88,14 @@ const FileUploadingModule = () => {
         <Text $size="small" $color={content.light}>
           Поддерживаемый формат - .csv
         </Text>
+        <Button
+          onClick={fetchFile}
+          disabled={requests['csv-upload'] === 'pending'}
+        >
+          <Flex justify="center">
+            <Text>Отправить</Text>
+          </Flex>
+        </Button>
       </Flex>
     </Flex>
   );
