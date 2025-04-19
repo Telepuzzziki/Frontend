@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { withIndentStyles } from '@hocs/withIndentStyles';
-import { Indent } from '@type/common';
+// import { Indent } from '@type/common';
 
 export interface FlexProps {
   direction?: string;
@@ -11,8 +11,8 @@ export interface FlexProps {
   flex?: string;
   grow?: string;
   shrink?: string;
-  top?: Indent;
-  left?: Indent;
+  top?: string;
+  left?: string;
   basis?: string;
 }
 
