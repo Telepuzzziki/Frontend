@@ -42,6 +42,7 @@ const FileUploadingModule = () => {
   const fetchFile = () => {
     if (file?.file) {
       reauestAddFile(file.file);
+      dispatch(uiActions.setActiveTab(1));
     } else {
       showErrorNotification('Загрузите файл');
     }
@@ -52,7 +53,13 @@ const FileUploadingModule = () => {
   });
 
   return (
-    <Flex flex="1" align="center" direction="column" gap="30px">
+    <Flex
+      flex="1"
+      align="center"
+      direction="column"
+      gap="30px"
+      style={{ paddingTop: 120, height: '100vh' }}
+    >
       <SubHeader>Загрузите файл базы конфигурационных единиц</SubHeader>
       <Flex gap="10px" direction="column" align="left">
         <FileUploader {...getRootProps()}>

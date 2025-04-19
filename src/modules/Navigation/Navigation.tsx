@@ -1,6 +1,6 @@
 import NavPoint from '@components/NavPoint/NavPoint';
 import { uiActions, uiSelectors } from '@store/ui';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 type NavigationProps = {
@@ -15,13 +15,14 @@ const Navigation: React.FC<NavigationProps> = ({ data, scrollToRef }) => {
   const selectPoint = (index: number) => {
     console.log(index);
     dispatch(uiActions.setActiveTab(index));
+  };
 
-    // Прокрутка к соответствующему элементу
-    const element = scrollToRef.current![index];
+  useEffect(() => {
+    const element = scrollToRef.current![selectedTab];
     if (element) {
       element.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
-  };
+  }, [selectedTab, scrollToRef]);
 
   return (
     <nav
@@ -30,6 +31,7 @@ const Navigation: React.FC<NavigationProps> = ({ data, scrollToRef }) => {
         top: 0,
         zIndex: 1000,
         backgroundColor: '#fff',
+        paddingTop: 40,
       }}
     >
       {data.map((el, index) => (

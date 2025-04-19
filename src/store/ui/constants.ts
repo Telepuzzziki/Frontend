@@ -4,4 +4,6 @@ export const uiInitialState: UIState = {
   requests: {},
   activeTab: 0,
   file: null,
+  equipment: null,
+  solve: null,
 };

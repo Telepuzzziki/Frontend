@@ -3,6 +3,7 @@ import {
   showSuccessNotification,
 } from '@lib/utils/notification';
 import { ApiError, AppApi } from '@type/api';
+import { Equipment, EquipmentData } from '@type/common';
 // import { ApiResponse } from '@type/common';
 import axios, { AxiosError } from 'axios';
 
@@ -53,4 +54,20 @@ export const reauestAddFile = async (data: File) => {
   } catch (err) {
     showErrorNotification(String(err));
   }
+};
+
+export const requestGetConflicts = async (): Promise<Equipment[]> => {
+  return await request.get(
+    'http://172.22.109.96:8080/api/v1/conflict/mock',
+    {},
+  );
+};
+
+export const requestCreateSolve = async (
+  data: EquipmentData,
+): Promise<{ Info: string; Equipment: EquipmentData[] }> => {
+  return await request.post(
+    'https://172.22.109.96:8080/api/v1/update-conflict',
+    [data],
+  );
 };

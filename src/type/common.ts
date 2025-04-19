@@ -89,3 +89,44 @@ export type ApiResponse = SuccessResponse | ErrorResponse;
 export type AnyObject = Record<string, any>;
 
 export type SetState<T> = React.Dispatch<React.SetStateAction<T>>;
+
+export type Response<T> = {
+  message: T;
+  statusCode: number;
+};
+
+export interface EquipmentData {
+  idid: number; // Long в Java соответствует number в TypeScript
+  id: string; // UUID можно представить как строку
+  created_on: string; // LocalDateTime можно представить как строку (ISO 8601)
+  updated_on: string; // LocalDateTime можно представить как строку (ISO 8601)
+  name: string;
+  ci_code: string;
+  short_name: string;
+  full_name: string;
+  description: string;
+  notes: string;
+  status: string;
+  manufacturer: string;
+  serial: string;
+  model: string;
+  location: string;
+  mount: string;
+  hostname: string;
+  dns: string;
+  ip: string;
+  cpu_cores: number; // Integer в Java соответствует number в TypeScript
+  cpu_freq: number; // Double в Java соответствует number в TypeScript
+  ram: number; // Integer в Java соответствует number в TypeScript
+  total_volume: number; // Double в Java соответствует number в TypeScript
+  type: string;
+  category: string;
+  user_org: string;
+  owner_org: string;
+  code_mon: string;
+}
+
+export type Equipment = {
+  main: Equipment;
+  child: Equipment;
+};
