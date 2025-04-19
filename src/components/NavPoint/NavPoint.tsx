@@ -13,12 +13,13 @@ const Square = styled.div<{ $selected?: boolean }>`
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: all 0.3s;
 `;
 
-const Line = styled.div<{ $selected?: boolean }>`
-  height: 140px;
-  border-left: 10px
-    ${(props) => (props.$selected ? content.dark : content.light)} solid;
+const Line = styled.div<{ $color?: string; $height?: number }>`
+  height: ${(props) => (props.$height ? props.$height : 70)}px;
+  border-left: 10px ${(props) => props.$color} solid;
+  transition: all 0.3s;
 `;
 
 type NavPointProps = {
@@ -26,6 +27,8 @@ type NavPointProps = {
   index: number;
   checked?: boolean;
   onClick?: VoidFunction;
+  isFirst?: boolean;
+  isLast?: boolean;
 };
 
 const NavPoint: React.FC<NavPointProps> = ({
@@ -33,9 +36,17 @@ const NavPoint: React.FC<NavPointProps> = ({
   index,
   onClick,
   checked = false,
+  isFirst = false,
+  isLast = false,
 }) => {
   return (
     <span style={{ cursor: 'pointer' }}>
+      {!isFirst && (
+        <Line
+          style={{ marginLeft: 25 }}
+          $color={checked ? content.dark : content.light}
+        />
+      )}
       <Flex align="center" gap="16px" onClick={onClick}>
         <Square $selected={checked}>
           <Text $size="subheader" $color={content.white}>
@@ -46,7 +57,12 @@ const NavPoint: React.FC<NavPointProps> = ({
           {label}
         </Text>
       </Flex>
-      <Line style={{ marginLeft: 25 }} />
+      {!isLast && (
+        <Line
+          style={{ marginLeft: 25 }}
+          $color={checked ? content.dark : content.light}
+        />
+      )}
     </span>
   );
 };

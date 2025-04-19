@@ -1,5 +1,6 @@
 import Flex from '@components/Flex';
 import { Header } from '@components/Typography';
+import FileUploadingModule from '@modules/FileUploading/FileUploading';
 import Navigation from '@modules/Navigation/Navigation';
 import logo from '@public/img/logo.png';
 import styled from 'styled-components';
@@ -28,9 +29,18 @@ const MainLayout = () => {
         </Flex>
       </header>
       <main>
-        <div style={{ marginTop: 192, marginLeft: 116 }}>
-          <Navigation data={['Загрузка данных', 'Поиск дубликатов']} />
-        </div>
+        <Flex style={{ margin: 116 }} justify="space-between">
+          <Navigation
+            data={[
+              'Загрузка данных',
+              'Поиск дубликатов',
+              'хуй',
+              'пизда',
+              'залупа',
+            ]}
+          />
+          <FileUploadingModule />
+        </Flex>
       </main>
     </>
   );
