@@ -1,0 +1,13 @@
+
+services:
+  frontend:
+    build: .                
+    image: nginx:alpine
+    ports:
+      - "8080:80"
+    volumes:
+      - ./dist:/usr/share/nginx/html   
+      - ./nginx/nginx.conf:/etc/nginx/conf.d/nginx.conf  # Конфиг Nginx
+    restart: unless-stopped
+    environment:
+      - NGINX_PORT=80
